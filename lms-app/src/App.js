@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
+//import HomePage from "./pages/HomePage";
+//import LoginPage from "./pages/LoginPage";
 import DiscussionForum from "./pages/DiscussionForum";
 //import DashboardPage from "./pages/DashboardPage";
 //import CoursePage from "./pages/CoursePage";
@@ -13,8 +13,7 @@ function App() {
     <NotificationProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
+      
           <Route path="/discussion" element={<DiscussionForum />} />
 
         </Routes>

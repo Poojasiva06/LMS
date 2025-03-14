@@ -1,37 +1,40 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:5001"); // Ensure backend WebSocket is running
 
 function DiscussionForum() {
-  const [posts, setPosts] = useState([]); // Holds all discussion posts
-  const [newPost, setNewPost] = useState(""); // Holds new input message
+  const [posts, setPosts] = useState([]);
+  const [newPost, setNewPost] = useState("");
 
-  // ✅ Fetch discussions when the component mounts
+  // ✅ Fetch discussions on mount
   useEffect(() => {
     axios
-      .get("http://localhost:5001/api/discussions") // Ensure correct API URL
-      .then((response) => {
-        console.log("Fetched Discussions:", response.data); // Debugging
-        setPosts(response.data);
-      })
-      .catch((error) =>
-        console.error("Error fetching discussions:", error.message)
-      );
-  }, []); // ✅ Run only once when component mounts
+      .get("http://localhost:5001/api/discussions")
+      .then((response) => setPosts(response.data))
+      .catch((error) => console.error("❌ Error fetching discussions:", error));
+
+    // ✅ Listen for new messages via WebSocket
+    socket.on("receive_discussions", (updatedPosts) => {
+      console.log("📩 Received new discussions:", updatedPosts);
+      setPosts(updatedPosts);
+    });
+
+    return () => {
+      socket.off("receive_discussions");
+    };
+  }, []);
 
   // ✅ Handle posting a new discussion
   const handlePostSubmit = async () => {
-    if (!newPost.trim()) {
-      console.log("Cannot post an empty message!"); // Debugging
-      return;
-    }
+    if (!newPost.trim()) return;
 
     const postData = {
-      user: "Student", // Replace with actual user data
+      user: "Student", // Replace with real user data
       content: newPost,
       timestamp: new Date().toISOString(),
     };
-
-    console.log("Posting:", postData); // Debugging
 
     try {
       const response = await axios.post(
@@ -39,14 +42,14 @@ function DiscussionForum() {
         postData
       );
 
-      console.log("Post Response:", response.data); // Debugging
+      console.log("✅ Post successful:", response.data);
 
-      // ✅ Update the posts state correctly
-      setPosts((prevPosts) => [...prevPosts, response.data]);
+      // ✅ Send update via WebSocket
+      socket.emit("new_discussion", response.data);
 
-      setNewPost(""); // ✅ Clear input after posting
+      setNewPost(""); // ✅ Clear input
     } catch (error) {
-      console.error("Error posting discussion:", error.message);
+      console.error("❌ Error posting discussion:", error.message);
     }
   };
 
@@ -56,7 +59,7 @@ function DiscussionForum() {
       <textarea
         placeholder="Write your message..."
         value={newPost}
-        onChange={(e) => setNewPost(e.target.value)} // ✅ Fix input handler
+        onChange={(e) => setNewPost(e.target.value)}
       />
       <button onClick={handlePostSubmit}>Post</button>
 
