@@ -1,0 +1,54 @@
+/* StudentDashboard.css */
+
+.student-dashboard {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    text-align: center;
+}
+
+.student-dashboard h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.no-courses {
+    font-style: italic;
+    color: #777;
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+}
+
+.course-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.course-card h3 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+.course-description {
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.video-container {
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.video-container iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
+}
