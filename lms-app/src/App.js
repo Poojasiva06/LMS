@@ -1,22 +1,21 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Login from "./Login";
-import StudentDashboard from "./StudentDashboard";
-import AdminDashboard from "./AdminDashboard";
+import NotificationPage from "./pages/NotificationPage";
+import DiscussionForum from "./pages/DiscussionForum";
+import { NotificationProvider } from "./context/NotificationContext";
 
 function App() {
-  const handleLogin = (type) => {
-    console.log("User logged in as:", type); // Debugging purpose
-  };
-
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login onLogin={handleLogin} />} />
-        <Route path="/student-dashboard" element={<StudentDashboard />} />
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
-      </Routes>
-    </Router>
+    <NotificationProvider>
+      <Router>
+        <Routes>
+          
+        <Route path="/notifications" element={<NotificationPage />} />
+          <Route path="/discussion" element={<DiscussionForum />} />
+          <Route path="*" element={<h2>404 - Page Not Found</h2>} />
+        </Routes>
+      </Router>
+    </NotificationProvider>
   );
 }
 
