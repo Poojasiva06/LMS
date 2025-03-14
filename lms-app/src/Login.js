@@ -1,26 +1,27 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
-const Login = () => {
+function Login({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = () => {
     if (username === "admin" && password === "admin123") {
-      localStorage.setItem("role", "admin");
-      navigate("/admin-dashboard");
+      onLogin("admin"); // Call the onLogin function
+      navigate("/admin-dashboard"); // Redirect to admin page
     } else if (username === "student" && password === "student123") {
-      localStorage.setItem("role", "student");
+      onLogin("student");
       navigate("/student-dashboard");
     } else {
-      alert("Invalid credentials!");
+      alert("Invalid credentials");
     }
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="login-container">
+      <h1>Login</h1>
       <input
         type="text"
         placeholder="Username"
@@ -36,6 +37,6 @@ const Login = () => {
       <button onClick={handleLogin}>Login</button>
     </div>
   );
-};
+}
 
 export default Login;

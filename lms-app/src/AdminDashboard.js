@@ -1,100 +1,120 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import "./AdminDashboard.css";
 
 const AdminDashboard = () => {
-  const [courses, setCourses] = useState([]);
-  const [newCourse, setNewCourse] = useState("");
-  const [newDescription, setNewDescription] = useState("");
-  const [editingIndex, setEditingIndex] = useState(null);
-  const navigate = useNavigate();
+    const [courseName, setCourseName] = useState("");
+    const [courseDescription, setCourseDescription] = useState("");
+    const [courseUrl, setCourseUrl] = useState("");
+    const [courses, setCourses] = useState([]);
+    const [editingCourseId, setEditingCourseId] = useState(null);
 
-  useEffect(() => {
-    const storedCourses = JSON.parse(localStorage.getItem("courses")) || [];
-    setCourses(storedCourses);
-  }, []);
+    useEffect(() => {
+        const storedCourses = JSON.parse(localStorage.getItem("courses")) || [];
+        setCourses(storedCourses);
+    }, []);
 
-  const saveCoursesToLocalStorage = (updatedCourses) => {
-    setCourses(updatedCourses);
-    localStorage.setItem("courses", JSON.stringify(updatedCourses));
-  };
+    const addOrUpdateCourse = () => {
+        if (!courseName || !courseDescription || !courseUrl) {
+            alert("Please fill in all fields!");
+            return;
+        }
 
-  const addCourse = () => {
-    if (newCourse.trim()) {
-      const updatedCourses = [...courses, { name: newCourse, description: newDescription }];
-      saveCoursesToLocalStorage(updatedCourses);
-      setNewCourse("");
-      setNewDescription("");
-    }
-  };
+        let updatedCourses;
 
-  const editCourse = (index) => {
-    setEditingIndex(index);
-    setNewCourse(courses[index].name);
-    setNewDescription(courses[index].description);
-  };
+        if (editingCourseId) {
+            updatedCourses = courses.map((course) =>
+                course.id === editingCourseId
+                    ? { ...course, name: courseName, description: courseDescription, url: courseUrl }
+                    : course
+            );
+            setEditingCourseId(null);
+        } else {
+            const newCourse = { id: Date.now(), name: courseName, description: courseDescription, url: courseUrl };
+            updatedCourses = [...courses, newCourse];
+        }
 
-  const updateCourse = () => {
-    let updatedCourses = [...courses];
-    updatedCourses[editingIndex] = { name: newCourse, description: newDescription };
-    saveCoursesToLocalStorage(updatedCourses);
-    setEditingIndex(null);
-    setNewCourse("");
-    setNewDescription("");
-  };
+        setCourses(updatedCourses);
+        localStorage.setItem("courses", JSON.stringify(updatedCourses));
 
-  const deleteCourse = (index) => {
-    const updatedCourses = courses.filter((_, i) => i !== index);
-    saveCoursesToLocalStorage(updatedCourses);
-  };
+        setCourseName("");
+        setCourseDescription("");
+        setCourseUrl("");
+    };
 
-  const logout = () => {
-    localStorage.removeItem("role");
-    navigate("/");
-  };
+    const editCourse = (course) => {
+        setCourseName(course.name);
+        setCourseDescription(course.description);
+        setCourseUrl(course.url);
+        setEditingCourseId(course.id);
+    };
 
-  return (
-    <div className="container mt-4">
-      <h2>Admin Dashboard</h2>
-      <button className="btn btn-danger mb-3" onClick={logout}>Logout</button>
+    const deleteCourse = (id) => {
+        const updatedCourses = courses.filter((course) => course.id !== id);
+        setCourses(updatedCourses);
+        localStorage.setItem("courses", JSON.stringify(updatedCourses));
+    };
 
-      <h3>Manage Courses</h3>
-      <div className="mb-3">
-        <input
-          type="text"
-          className="form-control mb-2"
-          placeholder="Course Name"
-          value={newCourse}
-          onChange={(e) => setNewCourse(e.target.value)}
-        />
-        <textarea
-          className="form-control mb-2"
-          placeholder="Course Description"
-          value={newDescription}
-          onChange={(e) => setNewDescription(e.target.value)}
-        />
-        {editingIndex === null ? (
-          <button className="btn btn-success" onClick={addCourse}>Add Course</button>
-        ) : (
-          <button className="btn btn-primary" onClick={updateCourse}>Update Course</button>
-        )}
-      </div>
+    const exitDashboard = () => {
+        window.location.href = "/";
+    };
 
-      <ul className="list-group">
-        {courses.map((course, index) => (
-          <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <strong>{course.name}</strong>
-              <p>{course.description}</p>
+    return (
+        <div className="admin-dashboard">
+            <h2>Admin Dashboard</h2>
+
+            <div className="course-form">
+                <input
+                    type="text"
+                    placeholder="Course Name"
+                    value={courseName}
+                    onChange={(e) => setCourseName(e.target.value)}
+                />
+
+                <textarea
+                    placeholder="Course Description"
+                    value={courseDescription}
+                    onChange={(e) => setCourseDescription(e.target.value)}
+                />
+
+                <input
+                    type="text"
+                    placeholder="Course URL (YouTube link)"
+                    value={courseUrl}
+                    onChange={(e) => setCourseUrl(e.target.value)}
+                />
+
+                <button onClick={addOrUpdateCourse}>
+                    {editingCourseId ? "Update Course" : "Add Course"}
+                </button>
             </div>
-            <div>
-              <button className="btn btn-warning me-2" onClick={() => editCourse(index)}>Edit</button>
-              <button className="btn btn-danger" onClick={() => deleteCourse(index)}>Delete</button>
+
+            <div className="course-container">
+                {courses.map((course) => (
+                    <div key={course.id} className="course-card">
+                        <h3>{course.name}</h3>
+                        <p>{course.description}</p>
+                        {course.url && (
+                            <iframe
+                                width="100%"
+                                height="200"
+                                src={course.url}
+                                title={course.name}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            ></iframe>
+                        )}
+                        <div className="button-group">
+                            <button onClick={() => editCourse(course)}>Edit</button>
+                            <button onClick={() => deleteCourse(course.id)}>Delete</button>
+                        </div>
+                    </div>
+                ))}
             </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+
+            <button className="exit-button" onClick={exitDashboard}>Exit</button>
+        </div>
+    );
 };
 
 export default AdminDashboard;

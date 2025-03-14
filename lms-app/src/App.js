@@ -5,10 +5,14 @@ import StudentDashboard from "./StudentDashboard";
 import AdminDashboard from "./AdminDashboard";
 
 function App() {
+  const handleLogin = (type) => {
+    console.log("User logged in as:", type); // Debugging purpose
+  };
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Login onLogin={handleLogin} />} />
         <Route path="/student-dashboard" element={<StudentDashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
       </Routes>
