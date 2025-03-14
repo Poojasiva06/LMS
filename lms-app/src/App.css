@@ -1,0 +1,37 @@
+/* Default styles */
+body {
+  transition: background-color 0.3s ease-in-out;
+  font-family: Arial, sans-serif;
+}
+
+/* Light Mode */
+body.light {
+  background-color: #e3f2fd; /* Light Blue */
+  color: black;
+}
+
+/* Dark Mode */
+body.dark {
+  background-color: #121212; /* Dark Mode */
+  color: white;
+}
+
+/* Style for theme toggle button */
+.theme-toggle {
+  padding: 10px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.theme-toggle.light {
+  background-color: #2196F3; /* Light Mode Button */
+  color: white;
+}
+
+.theme-toggle.dark {
+  background-color: #424242; /* Dark Mode Button */
+  color: white;
+}
