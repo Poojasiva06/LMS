@@ -1,22 +1,31 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./Login";
-import StudentDashboard from "./StudentDashboard";
 import AdminDashboard from "./AdminDashboard";
+import StudentDashboard from "./StudentDashboard";
+import AdminQuiz from "./AdminQuiz";
+import StudentQuiz from "./StudentQuiz"; // ✅ Import StudentQuiz
+import "./App.css";
 
 function App() {
-  const handleLogin = (type) => {
-    console.log("User logged in as:", type); // Debugging purpose
+  const navigate = useNavigate();
+
+  const handleLogin = (userRole) => {
+    if (userRole === "admin") {
+      navigate("/admin-dashboard");
+    } else if (userRole === "student") {
+      navigate("/student-dashboard");
+    }
   };
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login onLogin={handleLogin} />} />
-        <Route path="/student-dashboard" element={<StudentDashboard />} />
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/" element={<Login onLogin={handleLogin} />} />
+      <Route path="/admin-dashboard" element={<AdminDashboard />} />
+      <Route path="/student-dashboard" element={<StudentDashboard />} />
+      <Route path="/admin-quiz" element={<AdminQuiz />} />
+      <Route path="/student-quiz" element={<StudentQuiz />} /> {/* ✅ Added StudentQuiz */}
+    </Routes>
   );
 }
 
