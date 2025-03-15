@@ -1,0 +1,137 @@
+/* 🌟 Global Styling */
+body {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* 📌 Main Container */
+  .container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  /* Hover effect */
+  .container:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* 🎯 Headings */
+  h2 {
+    color: #fff;
+    font-size: 26px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+  }
+  
+  /* 📋 List Group */
+  .list-group {
+    border-radius: 10px;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* 📌 Individual List Item */
+  .list-group-item {
+    font-size: 18px;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Hover effect for list items */
+  .list-group-item:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.02);
+  }
+  
+  /* ✅ Enroll Button Styling */
+  .btn-success {
+    background: linear-gradient(45deg, #0f9b0f, #1fb911);
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 10px rgba(31, 185, 17, 0.8);
+  }
+  
+  /* Hover effect for the enroll button */
+  .btn-success:hover {
+    background: linear-gradient(45deg, #0d7a0d, #18a00e);
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(31, 185, 17, 1);
+  }
+  
+  /* Disabled button styling */
+  .btn-success:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
+  }
+  
+  /* 🎭 No Enrollment Message */
+  .text-muted {
+    text-align: center;
+    font-style: italic;
+    color: #ddd;
+    padding: 10px;
+  }
+  
+  /* ✨ Fade-in Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Apply animation to elements */
+  .container, h2, .list-group-item, .btn-success {
+    animation: fadeIn 0.6s ease-in-out;
+  }
+  
+  /* 🌙 Dark Mode Optimization */
+  @media (prefers-color-scheme: dark) {
+    body {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .list-group-item {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+  
