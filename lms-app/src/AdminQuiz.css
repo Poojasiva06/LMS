@@ -1,0 +1,91 @@
+body {
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScNs40rfCUxJQPWBYTHBqpheAm33QGRAOtVg&s');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+  }
+  
+.admin-quiz-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #576690; /* Dark blue background */
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  button {
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    background-color: #2563EB; /* Blue */
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  button:hover {
+    background-color: #1D4ED8; /* Darker blue */
+  }
+  
+  h2 {
+    font-size: 24px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  ul li {
+    background: #1E293B; /* Dark background for questions */
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+  }
+  
+  ul li strong {
+    font-size: 18px;
+  }
+  
+  ul ul {
+    padding-left: 20px;
+  }
+  
+  ul ul li {
+    background: none;
+    color: #D1D5DB;
+  }
+  
+  p {
+    font-size: 16px;
+    color: #10B981; /* Green for correct answer */
+  }
+  
+  .edit-btn {
+    background-color: #F59E0B; /* Yellow for edit */
+  }
+  
+  .delete-btn {
+    background-color: #EF4444; /* Red for delete */
+  }
+  
+  .edit-btn:hover {
+    background-color: #D97706;
+  }
+  
+  .delete-btn:hover {
+    background-color: #DC2626;
+  }
+  
