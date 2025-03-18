@@ -36,9 +36,22 @@
   button {
     padding: 10px;
     border: none;
-    background-color: black;
-    color: white;
+    background-color: rgb(103, 172, 224);
+    color: rgb(17, 17, 17);
     cursor: pointer;
     border-radius: 5px;
   }
-  
+  .exit-button {
+  background-color: red;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.exit-button:hover {
+  background-color: darkred;
+}
