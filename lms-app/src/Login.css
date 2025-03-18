@@ -1,48 +1,80 @@
-/* Apply background */
+/* Login.css */
+/* Login.css */
 body {
-    background-image: url('https://mindster.com/mindster-blogs/wp-content/uploads/2020/05/learning-management-system-illustration.png'); /* Adjust path if needed */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Login Container */
-  .login-container {
-    background: rgba(255, 255, 255, 0.8); /* Slight white transparency */
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 350px;
-  }
-  
-  /* Input Fields */
-  input {
-    width: 80%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  /* Button Styling */
-  button {
-    background: linear-gradient(45deg, #007BFF, #0056b3);
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: 0.3s;
-  }
-  
-  button:hover {
-    background: linear-gradient(45deg, #0056b3, #00408d);
-  }
-  
+  background: url("https://www.wiley.com/learn/jossey-bass/images/what-every-teacher-should-know-about-the-science-of-learning.jpg");
+  background-size: cover; /* Cover full screen */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent tiling */
+  height: 100vh; /* Full viewport height */
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Style the login box */
+.login-container {
+  width: 400px;
+  margin: 100px auto;
+  padding: 20px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8); /* Slight transparency for readability */
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+h1 {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.selection-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.selection-buttons button {
+  width: 100px;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.selection-buttons button.selected {
+  background-color: blue;
+  color: white;
+}
+
+.selection-buttons button:not(.selected) {
+  background-color: rgb(37, 98, 172);
+}
+
+input {
+  display: block;
+  width: 90%;
+  margin: 10px auto;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  width: 100px;
+  padding: 10px;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: darkgray;
+}
